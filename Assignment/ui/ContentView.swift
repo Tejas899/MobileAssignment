@@ -10,7 +10,9 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var viewModel = ContentViewModel()
     @State private var path: [DeviceData] = [] // Navigation path
-
+    var offlineText: String{
+        Reachability.isConnectedToNetwork() ? "" : "(Offline)"
+    }
     var body: some View {
         NavigationStack(path: $path) {
             Group {
@@ -26,7 +28,7 @@ struct ContentView: View {
                 let navigate = viewModel.navigateDetail
                 path.append(navigate!)
             })
-            .navigationTitle("Devices")
+            .navigationTitle("Devices \(offlineText)")
             .navigationDestination(for: DeviceData.self) { computer in
                 DetailView(device: computer)
             }

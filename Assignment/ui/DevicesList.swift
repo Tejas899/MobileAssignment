@@ -17,7 +17,14 @@ struct DevicesList: View {
                 onSelect(device)
             } label: {
                 VStack(alignment: .leading) {
-                    AssignmentText(text: device.name)
+                    AssignmentText(text: device.name, font: .headline)
+                    if let color = device.data?.color{
+                        AssignmentText(text: "Color: \(color)", font: .body)
+                    }
+                    if let price = device.data?.price{
+                        AssignmentText(text: "Price: $\(price)", font: .body)
+                    }
+                    
                 }
             }
         }

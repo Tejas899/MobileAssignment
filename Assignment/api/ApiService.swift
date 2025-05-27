@@ -13,6 +13,7 @@ class ApiService : NSObject {
     private let sourcesURL = URL(string: "https://api.restful-api.dev/objects")!
     
     func fetchDeviceDetails(completion : @escaping ([DeviceData]) -> ()){
+        // checks for offline stored data
         if !Reachability.isConnectedToNetwork(){
             guard let data = UserDefaults.standard.value( forKey: sourcesURL.absoluteString) as? Data else { return }
             let jsonDecoder = JSONDecoder()
