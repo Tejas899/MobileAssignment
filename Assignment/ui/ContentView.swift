@@ -34,5 +34,9 @@ struct ContentView: View {
                 viewModel.fetchAPI()
             }
         }
+        .searchable(text: $viewModel.searchText)
+        .onChange(of: viewModel.searchText) { oldValue, newValue in
+            self.viewModel.updateSearchResult()
+        }
     }
 }

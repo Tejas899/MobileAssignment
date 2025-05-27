@@ -31,4 +31,14 @@ class ContentViewModel : ObservableObject {
     func navigateToDetail(navigateDetail: DeviceData) {
         self.navigateDetail = navigateDetail
     }
+    
+    func updateSearchResult(){
+        if searchText.isEmpty {
+            self.dispalyListdata =  self.actualData
+            return
+        }
+        self.dispalyListdata = self.actualData .filter {
+            $0.name.contains(searchText)
+        }
+    }
 }
