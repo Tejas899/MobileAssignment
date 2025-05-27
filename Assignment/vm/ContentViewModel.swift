@@ -18,6 +18,7 @@ class ContentViewModel : ObservableObject {
     @Published var searchText: String = ""
 
     func fetchAPI() {
+       
         apiService.fetchDeviceDetails(completion: { item in
             Task{
                 await MainActor.run {
@@ -40,5 +41,9 @@ class ContentViewModel : ObservableObject {
         self.dispalyListdata = self.actualData .filter {
             $0.name.contains(searchText)
         }
+    }
+    
+    func loadFronCacahe(){
+        
     }
 }
