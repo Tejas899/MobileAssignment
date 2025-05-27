@@ -12,11 +12,19 @@ class ContentViewModel : ObservableObject {
     
     private let apiService = ApiService()
     @Published var navigateDetail: DeviceData? = nil
-    @Published var data: [DeviceData]? = []
+    @Published var dispalyListdata: [DeviceData] = []
+    @Published var actualData: [DeviceData] = []
+
+    @Published var searchText: String = ""
 
     func fetchAPI() {
         apiService.fetchDeviceDetails(completion: { item in
-            self.data = item
+            Task{
+                await MainActor.run {
+                    self.actualData = item
+                    self.dispalyListdata = item
+                }
+            }
         })
     }
     
